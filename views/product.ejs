@@ -15,7 +15,8 @@
                         </div>
                         <div class="reviews-counter">
 
-                            <span><%= product.numReviews %> Reviews</span>
+                            <span><%= product.numReviews %> Reviews</span><br/>
+                            <span><%= product.rating %>/5 Overall Rating</span>
                         </div>
                         <div class="product-price-discount"><span>$ <%= product.price %></span><span class="line-through">$<%= product.price - 1 %> </span></div>
                     </div>
@@ -53,7 +54,7 @@
                         </div>
                     </div>
                     <!--reviews------>
-                    <strong><%= review.rating %> stars</strong>
+                    <strong><%= review.rating %>/5 rating</strong>
                 </div>
                 <!--Comments---------------------------------------->
                 <div class="client-comment">
