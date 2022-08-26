@@ -1,0 +1,54 @@
+<%- include("partials/header"); -%>
+    <h1>
+        <%= homeContent %>
+    </h1>
+
+    <div id="wrap">
+
+        <div id="columns" class="columns_4">
+            <% postsList.forEach(function(postItem) { %>
+                <figure>
+                    <img src="data:image/<%=postItem.image.contentType%>;base64,<%=postItem.image.data.toString('base64')%>">
+                    <figcaption>
+                        <%= postItem.name%>
+                    </figcaption>
+                    <span class="price">$ <%= postItem.price %></span>
+                    <p class="card-text">
+                        <%= postItem.description.substring(0,30) + "..."  %>
+                    </p>
+                    <a class="button" href="/product/<%= postItem._id %>">Details</a>
+                </figure>
+
+                <% }) %>
+        </div>
+
+    </div>
+
+    <%- include("partials/footer"); -%>
+
+
+
+        <!-- <div class="container">
+          <div class="row">
+              <% postsList.forEach(function(postItem) { %>
+                  <div class="col-lg-4">
+                      <div class="card" style="width: 18rem;">
+                          <img class="card-img-top" style="width: 20rem;" src="data:image/<%=postItem.image.contentType%>;base64,<%=postItem.image.data.toString('base64')%>" alt="Card image cap">
+                          <div class="card-body">
+                              <h4 class="card-title">
+                                  <%= postItem.name %>
+                              </h4>
+                              <h5 class="card-title">
+                                  $
+                                  <%= postItem.price %>
+                              </h5>
+                              <p class="card-text">
+                                  <%= postItem.description %>
+                              </p>
+                              <a href="/product/<%= postItem._id %>" class="btn btn-primary">Details</a>
+                          </div>
+                      </div>
+                  </div>
+                  <% }) %>
+          </div>
+      </div> -->

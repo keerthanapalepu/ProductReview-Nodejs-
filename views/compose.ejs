@@ -1,0 +1,16 @@
+<%- include("partials/header"); -%>
+    <h1>Compose</h1>
+    <form class="" enctype="multipart/form-data" action="/compose" method="post">
+        <div class="form-group">
+            <label for="name">Product Name</label>
+            <input id="name" type="text" class="form-control" name="name" placeholder="Type here"><br />
+            <label for="file">Image</label>
+            <input type="file" name="image" accept="image/*" /><br />
+            <label for="price">Product Price</label>
+            <input id="price" type="text" class="form-control" name="price" placeholder="Type here"><br />
+            <label for="description">Product Description</label>
+            <textarea id="description" type="text" class="form-control" name="description" rows="4"></textarea><br />
+            <button class="btn btn-primary" type="submit" name="submit">Add Product</button>
+        </div>
+    </form>
+    <%- include("partials/footer"); -%>
