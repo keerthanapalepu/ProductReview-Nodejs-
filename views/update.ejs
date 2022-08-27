@@ -1,0 +1,20 @@
+<%- include("partials/header"); -%>
+    <h1>Update
+        <%= product.name %>
+    </h1>
+    <form class="" enctype="multipart/form-data" action="/update/<%= product._id %>" method="post">
+        <div class="form-group">
+            <label for="name">Product Name</label>
+            <input id="name" type="text" class="form-control" name="name" placeholder="Type here" value="<%= product.name %>"><br />
+
+            <label for="file">Image</label>
+            <input type="file" name="image" accept="image/*" /><br />
+            <label for="price">Product Price</label>
+            <input id="price" type="text" class="form-control" name="price" placeholder="Type here" value="<%= product.price %>"><br />
+            <label for="description">Product Description</label>
+            <textarea id="description" type="text" class="form-control" name="description" rows="4"><%= product.description %></textarea><br />
+
+            <button class="btn btn-primary" type="submit" name="submit">Update Product</button>
+        </div>
+    </form>
+    <%- include("partials/footer"); -%>

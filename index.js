@@ -62,29 +62,7 @@ app.post('/compose', upload.single('image'), (req, res, next) => {
 });
 
 app.post('/review/:product_id', async(req, res, next) => {
-    // const obj = new Product({
-    //     name: req.body.name,
-    //     description: req.body.description,
-    //     image: {
-    //         data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-    //         contentType: 'image/png'
-    //     },
-    //     price: req.body.price
-    // });
-    // obj.save();
-    // const comment = {
-    //     name: req.body.name,
-    //     rating: req.body.rate,
-    //     comment: req.body.review
-    // }
-    // Product.findByIdAndUpdate(req.params.product_id, { $push: { reviews: comment } }, { safe: true, upsert: true },
-    //     function(err, doc) {
-    //         if (err) {
-    //             console.log(err);
-    //         } else {
-    //             // console.log(doc);
-    //         }
-    //     });
+
     const product = await Product.findById(req.params.product_id);
     const comment = {
         name: req.body.name,
@@ -98,6 +76,20 @@ app.post('/review/:product_id', async(req, res, next) => {
     res.redirect(`/product/${req.params.product_id}`);
 });
 
+app.post('/update/:product_id', upload.single('image'), async(req, res, next) => {
+    const product = await Product.findById(req.params.product_id);
+    product.name = req.body.name;
+    product.description = req.body.description;
+    product.price = req.body.price;
+    if (req.file) {
+        product.image = {
+            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    };
+    await product.save()
+    res.redirect("/");
+});
 
 app.get("/product/:product_id", function(req, res) {
     Product.findOne({ _id: req.params.product_id }, function(err, Items) {
@@ -107,6 +99,30 @@ app.get("/product/:product_id", function(req, res) {
     });
 
 });
+
+app.get('/delete/:product_id', function(req, res, next) {
+    Product.findByIdAndRemove(req.params.product_id, (err, doc) => {
+        if (!err) {
+            res.redirect('/');
+        } else {
+            console.log('Failed to Delete user Details: ' + err);
+        }
+    });
+})
+
+app.get("/updateProduct/:product_id", function(req, res) {
+    Product.findOne({ _id: req.params.product_id }, function(err, items) {
+        if (!err) {
+            res.render("update", {
+                product: items
+            });
+        }
+    });
+});
+
+
+
+
 
 //
 app.listen(process.env.PORT || 5000, function() {
